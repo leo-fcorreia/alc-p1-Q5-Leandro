@@ -1,13 +1,8 @@
-"""
-Questão 5 - Solução de Ax = b por decomposição LU (sem pivotamento).
-numpy é usado apenas para criar arrays (np.array, np.eye, np.zeros).
-"""
 import numpy as np
 
 TOLERANCIA = 1e-12
 
 def resolve_lu(A, b):
-    """Resolve Ax = b com A = LU. Retorna L, U e x, nesta ordem."""
     A = np.array(A, dtype=float)
     b = np.array(b, dtype=float)
 
@@ -23,7 +18,7 @@ def resolve_lu(A, b):
     U = np.array(A, dtype=float)   # cópia de A, que vai virar U
     L = np.eye(n)                  # identidade: diagonal de L = 1
 
-    for k in range(n):                       # coluna do pivô
+    for k in range(n):   # coluna do pivô
         if abs(U[k][k]) < TOLERANCIA:
             raise Exception(
                 f"Pivô nulo na posição ({k+1},{k+1}). A decomposição LU sem "
@@ -42,7 +37,7 @@ def resolve_lu(A, b):
         soma = 0.0
         for j in range(i):
             soma += L[i][j] * y[j]
-        y[i] = b[i] - soma                   # L[i][i] = 1
+        y[i] = b[i] - soma    # L[i][i] = 1
 
     # 3) Substituição regressiva: Ux = y (de baixo para cima)
     x = np.zeros(n)
